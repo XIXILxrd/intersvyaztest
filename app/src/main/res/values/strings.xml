@@ -9,4 +9,6 @@
     <string name="max_price_label">Day\'s maximum:</string>
     <string name="last_market_label">Last deal:</string>
     <string name="last_updated_label">Updated:</string>
+    <string name="favorites_text">Favorites</string>
+    <string name="search_text">Search</string>
 </resources>

@@ -11,7 +11,7 @@ import com.example.intersvyaztest.domain.CoinInfo
 import com.example.intersvyaztest.presentation.adapter.CoinInfoAdapter
 import com.example.itntersvyaztest.databinding.FragmentCoinPriceListBinding
 
-class CoinPriceListFragment: Fragment() {
+class CoinPriceListFragment : Fragment() {
     private lateinit var viewModel: CoinViewModel
 
     private var _binding: FragmentCoinPriceListBinding? = null
@@ -35,7 +35,7 @@ class CoinPriceListFragment: Fragment() {
 
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinInfo) {
-//                launchDetailFragment(coinPriceInfo.fromSymbol)
+                launchDetailFragment(coinPriceInfo.fromSymbol)
             }
         }
 
@@ -48,7 +48,17 @@ class CoinPriceListFragment: Fragment() {
     }
 
     private fun launchDetailFragment(fromSymbol: String) {
-        findNavController().navigate(Direction)
+        findNavController().navigate(
+            CoinPriceListFragmentDirections.actionCoinPriceListFragmentToCoinDetailFragment(
+                fromSymbol
+            )
+        )
+    }
+
+    private fun launchFavoriteListFragment() {
+        findNavController().navigate(
+            CoinPriceListFragmentDirections.actionCoinPriceListFragmentToFavoriteCoinListFragment()
+        )
     }
 
     override fun onDestroyView() {
