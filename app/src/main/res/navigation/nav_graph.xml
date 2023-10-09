@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/coinPriceListFragment">
+
+    <fragment
+        android:id="@+id/coinPriceListFragment"
+        android:name="com.example.intersvyaztest.presentation.CoinPriceListFragment"
+        android:label="CoinPriceListFragment" >
+        <action
+            android:id="@+id/action_coinPriceListFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment" />
+        <action
+            android:id="@+id/action_coinPriceListFragment_to_favoriteCoinListFragment"
+            app:destination="@id/favoriteCoinListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coinDetailFragment"
+        android:name="com.example.intersvyaztest.presentation.CoinDetailFragment"
+        android:label="CoinDetailFragment" >
+        <argument
+            android:name="fromSymbol"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteCoinListFragment"
+        android:name="com.example.intersvyaztest.presentation.FavoriteCoinListFragment"
+        android:label="FavoriteCoinListFragment" >
+        <action
+            android:id="@+id/action_favoriteCoinListFragment_to_coinDetailFragment"
+            app:destination="@id/coinDetailFragment" />
+    </fragment>
+</navigation>

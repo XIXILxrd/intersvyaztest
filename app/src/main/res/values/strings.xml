@@ -1,0 +1,12 @@
+<resources>
+    <string name="logo_coin_description">Logo of coin</string>
+    <string name="app_name">Top coins</string>
+    <string name="symbols_template">%s / %s</string>
+    <string name="last_update_template">Updated: %s</string>
+    <string name="slash">/</string>
+    <string name="price_label">Price:</string>
+    <string name="min_price_label">Day\'s minimum:</string>
+    <string name="max_price_label">Day\'s maximum:</string>
+    <string name="last_market_label">Last deal:</string>
+    <string name="last_updated_label">Updated:</string>
+</resources>
