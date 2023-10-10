@@ -29,9 +29,28 @@ class CoinRepositoryImplementation(private val application: Application) : CoinR
         }
     }
 
+    override fun getFavoriteCoinInfoList(): LiveData<List<CoinInfo>> {
+        return coinInfoDao.getFavoriteCoinsList().map {
+            it.map { dbModel ->
+                mapper.mapDbModelToEntity(dbModel)
+            }
+        }
+    }
+
+    override fun getSearchResultCoinInfoList(fromSymbol: String): LiveData<List<CoinInfo>> {
+        return coinInfoDao.getSearchResultCoinInfoList(fromSymbol).map {
+            it.map { dbModel ->
+                mapper.mapDbModelToEntity(dbModel)
+            }
+        }
+    }
+
     override fun loadData() {
         val workManager = WorkManager.getInstance(application)
-        workManager.enqueueUniqueWork(RefreshDataWorker.NAME, ExistingWorkPolicy.REPLACE, RefreshDataWorker.makeRequest())
-
+        workManager.enqueueUniqueWork(
+            RefreshDataWorker.NAME,
+            ExistingWorkPolicy.REPLACE,
+            RefreshDataWorker.makeRequest()
+        )
     }
 }

@@ -22,7 +22,8 @@ class CoinMapper {
         lowDay = dto.lowDay,
         lastMarket = dto.lastMarket,
         imageUrl = BASE_IMAGE_URL + dto.imageUrl,
-        isFavorite = dto.isFavorite
+        isFavorite = dto.isFavorite,
+        description = null
     )
 
     fun mapJsonContainerToListContainer(jsonContainer: CoinInfoJsonContainerDTO): List<CoinInfoDTO> {
@@ -61,7 +62,8 @@ class CoinMapper {
         lowDay = dbModel.lowDay,
         lastMarket = dbModel.lastMarket,
         imageUrl = dbModel.imageUrl,
-        isFavorite = dbModel.isFavorite
+        isFavorite = dbModel.isFavorite,
+        description = dbModel.description
     )
 
     private fun convertTimestampToTime(timestamp: Long?): String {
@@ -71,7 +73,7 @@ class CoinMapper {
 
         val stamp = Timestamp(timestamp * 1000)
         val date = Date(stamp.time)
-        val pattern = "HH:mm:ss"
+        val pattern = "HH:mm"
         val sdf = SimpleDateFormat(pattern, Locale.getDefault())
 
         sdf.timeZone = TimeZone.getDefault()

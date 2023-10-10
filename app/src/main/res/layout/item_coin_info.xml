@@ -15,11 +15,20 @@
             android:id="@+id/logoCoinImageView"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/logo_coin_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@mipmap/ic_launcher"
-            android:contentDescription="@string/logo_coin_description" />
+            tools:src="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_favorite_24" />
 
         <TextView
             android:id="@+id/symbolsTextView"
@@ -55,9 +64,9 @@
             android:padding="16dp"
             android:textColor="#000"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             tools:text="Время последнего обновления: 21:52" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

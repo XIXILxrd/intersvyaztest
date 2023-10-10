@@ -7,5 +7,9 @@ interface CoinRepository {
 
     fun getCoinInfo(fromSymbol: String): LiveData<CoinInfo>
 
+    fun getFavoriteCoinInfoList(): LiveData<List<CoinInfo>>
+
+    fun getSearchResultCoinInfoList(fromSymbol: String): LiveData<List<CoinInfo>>
+
     fun loadData()
 }

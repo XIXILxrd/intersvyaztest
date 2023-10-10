@@ -15,7 +15,10 @@ interface CoinInfoDao {
     fun getPriceInfoAboutCoin(fSym: String): LiveData<CoinInfoDatabaseModel>
 
     @Query("SELECT * FROM full_price_list WHERE isFavorite == 1")
-    fun getFavoriteCoinsList(): LiveData<CoinInfoDatabaseModel>
+    fun getFavoriteCoinsList(): LiveData<List<CoinInfoDatabaseModel>>
+
+    @Query("SELECT * FROM full_price_list WHERE fromSymbol == :fSym")
+    fun getSearchResultCoinInfoList(fSym: String): LiveData<List<CoinInfoDatabaseModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPriceList(priceList: List<CoinInfoDatabaseModel>)

@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import com.example.itntersvyaztest.databinding.FragmentCoinDetailBinding
 import com.squareup.picasso.Picasso
 
 class CoinDetailFragment : Fragment() {
+    private val args by navArgs<CoinDetailFragmentArgs>()
     private lateinit var viewModel: CoinViewModel
 
     private var _binding: FragmentCoinDetailBinding? = null
@@ -29,7 +31,7 @@ class CoinDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fromSymbol = getSymbol()
+        val fromSymbol = args.fromSymbol
 
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.getDetailInfo(fromSymbol).observe(viewLifecycleOwner) {
@@ -49,22 +51,5 @@ class CoinDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun getSymbol(): String {
-        return requireArguments().getString(EXTRA_FROM_SYMBOL, EMPTY_SYMBOL)
-    }
-
-    companion object {
-        private const val EXTRA_FROM_SYMBOL = "fSym"
-        private const val EMPTY_SYMBOL = ""
-
-        fun newInstance(fromSymbol: String): Fragment {
-            return CoinDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(EXTRA_FROM_SYMBOL, fromSymbol)
-                }
-            }
-        }
     }
 }

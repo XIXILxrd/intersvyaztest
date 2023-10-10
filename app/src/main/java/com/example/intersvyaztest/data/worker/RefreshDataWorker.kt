@@ -36,12 +36,13 @@ class RefreshDataWorker(
                 Log.i("LoadData", "error")
             }
 
-            delay(10000)
+            delay(REFRESH_TIME_MIN)
         }
     }
 
     companion object {
         const val NAME = "RefreshDataWorker"
+        private const val REFRESH_TIME_MIN = 60000L
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<RefreshDataWorker>().build()

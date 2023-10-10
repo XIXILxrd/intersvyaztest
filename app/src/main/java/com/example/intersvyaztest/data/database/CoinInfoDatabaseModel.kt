@@ -14,5 +14,6 @@ data class CoinInfoDatabaseModel(
     val lowDay: String?,
     val lastMarket: String?,
     val imageUrl: String,
-    var isFavorite: Boolean
+    var isFavorite: Boolean,
+    var description: String?
 )

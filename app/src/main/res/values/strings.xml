@@ -11,4 +11,6 @@
     <string name="last_updated_label">Updated:</string>
     <string name="favorites_text">Favorites</string>
     <string name="search_text">Search</string>
+    <string name="query_hint_text">Let\'s find something interesting</string>
+    <string name="nothing_found_text">Nothing found</string>
 </resources>

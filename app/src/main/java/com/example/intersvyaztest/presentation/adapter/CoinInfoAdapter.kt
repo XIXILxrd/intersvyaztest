@@ -2,10 +2,10 @@ package com.example.intersvyaztest.presentation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.example.intersvyaztest.domain.CoinInfo
-import com.example.intersvyaztest.presentation.CoinPriceListFragment
 import com.example.itntersvyaztest.R
 import com.example.itntersvyaztest.databinding.ItemCoinInfoBinding
 import com.squareup.picasso.Picasso
@@ -36,7 +36,17 @@ class CoinInfoAdapter(private val context: Context) :
                 symbolsTextView.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                 priceTextView.text = price
                 lastUpdateTextView.text = String.format(lastUpdateTemplate, lastUpdate)
+                favoriteImageView.visibility = if (isFavorite) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+
                 Picasso.get().load(imageUrl).into(logoCoinImageView)
+
+                root.setOnClickListener {
+                    onCoinClickListener?.onCoinClick(this)
+                }
             }
         }
     }
