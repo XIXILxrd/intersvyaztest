@@ -19,4 +19,11 @@
     <string name="share_image_button_text">Share image</string>
     <string name="ok_notification_button_text">OK</string>
     <string name="notification_create_snackbar_text">A reminder has been created</string>
+    <string name="fifteen_minutes_text">15 minutes</string>
+    <string name="one_hour_text">1 hour</string>
+    <string name="one_day_text">1 day</string>
+    <string name="seven_days_text">7 days</string>
+    <string name="choose_period_text">Choose period:</string>
+    <string name="selected_period_text">Selected period:</string>
+    <string name="notification_text">It\'s time to check</string>
 </resources>

@@ -13,9 +13,11 @@
         android:layout_margin="8dp"
         android:layout_weight="8"
         android:background="@drawable/searchview_background"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
         app:iconifiedByDefault="false"
-        app:queryHint="@string/query_hint_text"
-        app:queryBackground="@android:color/transparent"/>
+        app:queryBackground="@android:color/transparent"
+        app:queryHint="@string/query_hint_text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/coinPriceListRecyclerView"

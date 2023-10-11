@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.example.intersvyaztest.presentation.feature.ChooseTimeDialogFragment
 import com.example.intersvyaztest.presentation.feature.notification.Notification
 import com.example.itntersvyaztest.R
 import com.example.itntersvyaztest.databinding.FragmentCoinDetailBinding
@@ -64,22 +65,66 @@ class CoinDetailFragment : Fragment() {
                 }
 
                 reminderImageButton.setOnClickListener {
-                    Notification.scheduleNotification(
-                        requireContext(),
-                        fromSymbol,
-                        fromSymbol,
-                        "It's time to check $fromSymbol",
-                        Notification.TIME_1MIN
-                    )
+                    val dialogFragment = ChooseTimeDialogFragment()
+
+                    showChooseTimeDialog(dialogFragment)
+                    setTimeFromChooseTimeDialogFragment(dialogFragment, fromSymbol)
 
                     Snackbar.make(
                         requireView(),
-                        getString(R.string.notification_create_snackbar_text),
+                        getString(
+                            R.string.notification_create_snackbar_text
+                        ),
                         Snackbar.LENGTH_SHORT
                     ).show()
                 }
             }
         }
+    }
+
+    private fun setTimeFromChooseTimeDialogFragment(
+        dialogFragment: ChooseTimeDialogFragment,
+        fromSymbol: String
+    ) {
+        dialogFragment.onTimeSelectedListener =
+            object : ChooseTimeDialogFragment.TimeSelectionListener {
+                override fun onTimeSelected(selectedTime: String) {
+                    when (selectedTime) {
+                        getString(R.string.fifteen_minutes_text) -> {
+                            showNotification(fromSymbol, Notification.TIME_15MIN)
+                        }
+
+                        getString(R.string.one_hour_text) -> {
+                            showNotification(fromSymbol, Notification.TIME_1HOUR)
+                        }
+
+                        getString(R.string.one_day_text) -> {
+                            showNotification(fromSymbol, Notification.TIME_1DAY)
+                        }
+
+                        getString(R.string.seven_days_text) -> {
+                            showNotification(fromSymbol, Notification.TIME_7DAYS)
+                        }
+                    }
+                }
+            }
+    }
+
+    private fun showNotification(fromSymbol: String, time: Long) {
+        Notification.scheduleNotification(
+            requireContext(),
+            fromSymbol,
+            fromSymbol,
+            getString(R.string.notification_text) + fromSymbol,
+            time
+        )
+    }
+
+    private fun showChooseTimeDialog(dialogFragment: ChooseTimeDialogFragment) {
+        dialogFragment.show(
+            requireActivity().supportFragmentManager,
+            ChooseTimeDialogFragment.TAG
+        )
     }
 
     private fun swapFavoriteIcon(isFavorite: Boolean) {

@@ -45,7 +45,6 @@ class Notification : BroadcastReceiver() {
         private const val TITLE_EXTRA = "title_extra"
         private const val MESSAGE_EXTRA = "message_extra"
         const val FROM_SYMBOL_EXTRA = "fromSymbol"
-        const val TIME_1MIN = 6000L
         const val TIME_15MIN = 900000L
         const val TIME_1HOUR = 3600000L
         const val TIME_1DAY = 86400000L
@@ -78,7 +77,7 @@ class Notification : BroadcastReceiver() {
             }
 
             val pendingIntent = PendingIntent.getBroadcast(
-                context, NOTIFICATION_ID, intent,
+                context, System.currentTimeMillis().toInt(), intent,
                 PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
 
