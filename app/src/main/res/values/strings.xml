@@ -13,4 +13,10 @@
     <string name="search_text">Search</string>
     <string name="query_hint_text">Let\'s find something interesting</string>
     <string name="nothing_found_text">Nothing found</string>
+    <string name="favorite_button_text">Favorite</string>
+    <string name="reminder_button_text">Set alarm</string>
+    <string name="save_image_button_text">Save image</string>
+    <string name="share_image_button_text">Share image</string>
+    <string name="ok_notification_button_text">OK</string>
+    <string name="notification_create_snackbar_text">A reminder has been created</string>
 </resources>

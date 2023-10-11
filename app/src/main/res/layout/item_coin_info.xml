@@ -28,7 +28,8 @@
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_favorite_24" />
+            app:srcCompat="@drawable/baseline_favorite_40"
+            android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/symbolsTextView"
