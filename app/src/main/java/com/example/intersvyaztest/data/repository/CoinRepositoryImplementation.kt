@@ -10,6 +10,9 @@ import com.example.intersvyaztest.data.mapper.CoinMapper
 import com.example.intersvyaztest.data.worker.RefreshDataWorker
 import com.example.intersvyaztest.domain.CoinInfo
 import com.example.intersvyaztest.domain.CoinRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 class CoinRepositoryImplementation(private val application: Application) : CoinRepository {
     private val coinInfoDao = ApplicationDatabase.getInstance(application).coinPriceInfoDao()
@@ -41,6 +44,18 @@ class CoinRepositoryImplementation(private val application: Application) : CoinR
         return coinInfoDao.getSearchResultCoinInfoList(fromSymbol).map {
             it.map { dbModel ->
                 mapper.mapDbModelToEntity(dbModel)
+            }
+        }
+    }
+
+    override suspend fun updateCoinInfo(
+        fromSymbol: String,
+        isFavorite: Boolean,
+        description: String?
+    ) {
+        coroutineScope {
+            launch(Dispatchers.IO) {
+                coinInfoDao.updateCoinInfo(fromSymbol, isFavorite, description)
             }
         }
     }

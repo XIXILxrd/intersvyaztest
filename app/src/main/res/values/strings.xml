@@ -26,4 +26,6 @@
     <string name="choose_period_text">Choose period:</string>
     <string name="selected_period_text">Selected period:</string>
     <string name="notification_text">It\'s time to check</string>
+    <string name="remove_from_favorites_snackbar_text">Remove from favorites?</string>
+    <string name="undo_snackbar_text">Undo\n</string>
 </resources>

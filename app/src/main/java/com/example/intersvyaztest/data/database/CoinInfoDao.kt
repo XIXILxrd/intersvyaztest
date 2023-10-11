@@ -20,6 +20,9 @@ interface CoinInfoDao {
     @Query("SELECT * FROM full_price_list WHERE fromSymbol == :fSym")
     fun getSearchResultCoinInfoList(fSym: String): LiveData<List<CoinInfoDatabaseModel>>
 
+    @Query("UPDATE full_price_list SET isFavorite = :isFavorite, description = :description WHERE fromSymbol = :fromSymbol")
+    fun updateCoinInfo(fromSymbol: String, isFavorite: Boolean, description: String?)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPriceList(priceList: List<CoinInfoDatabaseModel>)
 }

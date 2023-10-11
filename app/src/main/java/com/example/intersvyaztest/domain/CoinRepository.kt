@@ -11,5 +11,7 @@ interface CoinRepository {
 
     fun getSearchResultCoinInfoList(fromSymbol: String): LiveData<List<CoinInfo>>
 
+    suspend fun updateCoinInfo(fromSymbol: String, isFavorite: Boolean, description: String?)
+
     fun loadData()
 }

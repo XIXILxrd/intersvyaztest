@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.intersvyaztest.presentation.feature.ChooseTimeDialogFragment
 import com.example.intersvyaztest.presentation.feature.notification.Notification
@@ -13,6 +14,7 @@ import com.example.itntersvyaztest.R
 import com.example.itntersvyaztest.databinding.FragmentCoinDetailBinding
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 
 class CoinDetailFragment : Fragment() {
     private val args by navArgs<CoinDetailFragmentArgs>()
@@ -60,8 +62,11 @@ class CoinDetailFragment : Fragment() {
                 swapFavoriteIcon(coin.isFavorite)
 
                 addToFavoriteImageButton.setOnClickListener {
-                    TODO()
-                    //swapFavoriteIcon(coin.isFavorite)
+                    lifecycleScope.launch {
+                        viewModel.updateCoinInfo(coin.fromSymbol, !coin.isFavorite, coin.description)
+                    }
+
+                    swapFavoriteIcon(coin.isFavorite)
                 }
 
                 reminderImageButton.setOnClickListener {
