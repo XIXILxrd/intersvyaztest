@@ -14,14 +14,14 @@ import java.io.FileOutputStream
 class ImageSharing(private val context: Context) {
 
     fun shareImage(imageView: ImageView) {
-        val bitmap = imageView.drawable.toBitmap()
-
-        val cachePath = File(context.cacheDir, "images")
-        cachePath.mkdirs()
-        val file = File(cachePath, "shared_image.png")
-        val fileOutputStream = FileOutputStream(file)
-
         try {
+            val bitmap = imageView.drawable.toBitmap()
+
+            val cachePath = File(context.cacheDir, "images")
+            cachePath.mkdirs()
+            val file = File(cachePath, "shared_image.png")
+            val fileOutputStream = FileOutputStream(file)
+
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
             fileOutputStream.flush()
             fileOutputStream.close()

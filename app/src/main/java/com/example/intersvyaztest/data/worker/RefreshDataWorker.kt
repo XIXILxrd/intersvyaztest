@@ -23,7 +23,7 @@ class RefreshDataWorker(
     override suspend fun doWork(): Result {
         while (true) {
             try {
-                val topCoins = apiService.getTopCoinsInfo(limit = 100)
+                val topCoins = apiService.getTopCoinsInfo()
                 val fromSymbols = mapper.mapNamesListToString(topCoins)
                 val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
                 val coinInfoDtoList = mapper.mapJsonContainerToListContainer(jsonContainer)
@@ -42,7 +42,7 @@ class RefreshDataWorker(
 
     companion object {
         const val NAME = "RefreshDataWorker"
-        private const val REFRESH_TIME_MIN = 300000L
+        private const val REFRESH_TIME_MIN = 600000L
 
         fun makeRequest(): OneTimeWorkRequest {
             return OneTimeWorkRequestBuilder<RefreshDataWorker>().build()

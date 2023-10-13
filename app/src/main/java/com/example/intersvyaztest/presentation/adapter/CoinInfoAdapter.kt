@@ -14,6 +14,8 @@ class CoinInfoAdapter(private val context: Context) :
     ListAdapter<CoinInfo, CoinInfoViewHolder>(CoinInfoDiffCallback) {
 
     var onCoinClickListener: OnCoinClickListener? = null
+    var onLongCoinClickListener: OnLongCoinClickListener? = null
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         val binding = ItemCoinInfoBinding.inflate(
@@ -31,11 +33,10 @@ class CoinInfoAdapter(private val context: Context) :
         with(holder.binding) {
             with(coin) {
                 val symbolsTemplate = context.resources.getString(R.string.symbols_template)
-                val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
 
                 symbolsTextView.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                 priceTextView.text = price
-                lastUpdateTextView.text = String.format(lastUpdateTemplate, lastUpdate)
+                descriptionTextView.text = description
                 favoriteImageView.visibility = if (isFavorite) {
                     View.VISIBLE
                 } else {
@@ -47,11 +48,19 @@ class CoinInfoAdapter(private val context: Context) :
                 root.setOnClickListener {
                     onCoinClickListener?.onCoinClick(this)
                 }
+
+                root.setOnLongClickListener {
+                   onLongCoinClickListener?.onLongCoinClick(this) == true
+                }
             }
         }
     }
 
     interface OnCoinClickListener {
         fun onCoinClick(coinPriceInfo: CoinInfo)
+    }
+
+    interface OnLongCoinClickListener {
+        fun onLongCoinClick(coinInfo: CoinInfo): Boolean
     }
 }

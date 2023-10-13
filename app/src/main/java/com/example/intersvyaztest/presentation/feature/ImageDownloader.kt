@@ -7,14 +7,28 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.provider.MediaStore
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.intersvyaztest.presentation.feature.util.NetworkUtil
+import com.example.itntersvyaztest.R
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
 class ImageDownloader(private val context: Context, private val activity: Activity) {
     fun downloadImageAndSave(url: String) {
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (!NetworkUtil.isNetworkAvailable(context)) {
+            showDownloadUnavailableSnackbar()
+
+            return
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             Picasso.get().load(url).into(object : Target {
                 override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                     bitmap?.let {
@@ -63,6 +77,16 @@ class ImageDownloader(private val context: Context, private val activity: Activi
         } finally {
             bitmap.recycle()
         }
+    }
+
+    private fun showDownloadUnavailableSnackbar() {
+        val view = activity.findViewById<View>(R.id.fragment_container)
+
+        Snackbar.make(
+            view,
+            context.getString(R.string.download_unavailable_text),
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 }
 

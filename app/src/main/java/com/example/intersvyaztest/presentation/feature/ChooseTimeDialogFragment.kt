@@ -9,10 +9,6 @@ import com.example.itntersvyaztest.R
 class ChooseTimeDialogFragment : DialogFragment() {
 
     private val timeArray = arrayOf(
-//        requireContext().getString(R.string.fifteen_minutes_text),
-//        requireContext().getString(R.string.one_hour_text),
-//        requireContext().getString(R.string.one_day_text),
-//        requireContext().getString(R.string.seven_days_text)
         "15 minutes", "1 hour", "1 day", "7 days"
     )
 

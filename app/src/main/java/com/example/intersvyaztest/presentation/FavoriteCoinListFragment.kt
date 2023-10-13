@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.intersvyaztest.domain.CoinInfo
 import com.example.intersvyaztest.presentation.adapter.CoinInfoAdapter
+import com.example.intersvyaztest.presentation.feature.EditDescriptionDialogFragment
 import com.example.itntersvyaztest.R
 import com.example.itntersvyaztest.databinding.FragmentFavoriteCoinListBinding
 import com.google.android.material.snackbar.Snackbar
@@ -36,6 +39,8 @@ class FavoriteCoinListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel =
+            ViewModelProvider(this@FavoriteCoinListFragment)[CoinViewModel::class.java]
 
         val adapter = CoinInfoAdapter(requireActivity().application)
 
@@ -51,17 +56,31 @@ class FavoriteCoinListFragment : Fragment() {
     }
 
     private fun bindRecyclerView(adapter: CoinInfoAdapter) {
-        adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinInfo) {
-                launchDetailFragment(coinPriceInfo.fromSymbol)
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
+                    override fun onCoinClick(coinPriceInfo: CoinInfo) {
+                        launchDetailFragment(coinPriceInfo.fromSymbol)
+                    }
+                }
+
+                adapter.onLongCoinClickListener = object : CoinInfoAdapter.OnLongCoinClickListener {
+                    override fun onLongCoinClick(coinInfo: CoinInfo): Boolean {
+                        EditDescriptionDialogFragment(coinInfo).show(
+                            requireActivity().supportFragmentManager,
+                            EditDescriptionDialogFragment.TAG
+                        )
+
+                        return true
+                    }
+                }
+
+                binding.favoriteCoinListRecyclerView.adapter = adapter
+
+                viewModel.getFavoriteCoins().observe(viewLifecycleOwner) {
+                    adapter.submitList(it)
+                }
             }
-        }
-
-        binding.favoriteCoinListRecyclerView.adapter = adapter
-
-        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.getFavoriteCoins().observe(viewLifecycleOwner) {
-            adapter.submitList(it)
         }
     }
 
