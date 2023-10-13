@@ -125,5 +125,5 @@ data class CoinInfoDTO(
     @SerializedName("IMAGEURL")
     @Expose
     val imageUrl: String?,
-    var isFavorite: Boolean = false
+    var isFavorite: Boolean?
 )

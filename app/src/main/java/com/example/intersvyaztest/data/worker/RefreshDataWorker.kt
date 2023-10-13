@@ -23,7 +23,7 @@ class RefreshDataWorker(
     override suspend fun doWork(): Result {
         while (true) {
             try {
-                val topCoins = apiService.getTopCoinsInfo(limit = 25)
+                val topCoins = apiService.getTopCoinsInfo(limit = 100)
                 val fromSymbols = mapper.mapNamesListToString(topCoins)
                 val jsonContainer = apiService.getFullPriceList(fSyms = fromSymbols)
                 val coinInfoDtoList = mapper.mapJsonContainerToListContainer(jsonContainer)

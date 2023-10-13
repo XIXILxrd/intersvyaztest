@@ -28,4 +28,8 @@
     <string name="notification_text">It\'s time to check</string>
     <string name="remove_from_favorites_snackbar_text">Remove from favorites?</string>
     <string name="undo_snackbar_text">Undo\n</string>
+    <string name="share_image_text">Share image</string>
+    <string name="no_suitable_applications_for_image_sharing_toast_text">No suitable applications for image sharing</string>
+    <string name="error_sharing_an_image_snackbar_text">Error sharing an image</string>
+    <string name="no_connection_to_the_internetclick_to_apply_snackbar_text">No connection to the InternetClick to apply</string>
 </resources>

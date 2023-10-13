@@ -22,7 +22,7 @@ class CoinMapper {
         lowDay = dto.lowDay,
         lastMarket = dto.lastMarket,
         imageUrl = BASE_IMAGE_URL + dto.imageUrl,
-        isFavorite = dto.isFavorite,
+        isFavorite = dto.isFavorite ?: false,
         description = null
     )
 
